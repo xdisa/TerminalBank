@@ -1,3 +1,5 @@
+package services;
+
 public class PinValidator {
     private boolean starting = false;
     private long endTimeMillis;
@@ -22,7 +24,7 @@ public class PinValidator {
     }
 
     public boolean checkBlocking() {
-        if(!starting || System.currentTimeMillis() >= endTimeMillis) {
+        if (!starting || System.currentTimeMillis() >= endTimeMillis) {
             stop();
             return false;
         } else {

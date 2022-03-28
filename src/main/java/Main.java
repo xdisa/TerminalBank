@@ -1,16 +1,24 @@
-import java.util.Scanner;
+import exceptions.DontCorrentPinCodeExeption;
+import models.Person;
+import services.PersonService;
+import services.PersonServiceImpl;
+import services.Terminal;
+import services.TerminalImpl;
+import services.TransferService;
+import services.TransferServiceImpl;
 
 public class Main {
 
     public static void main(String[] args) throws DontCorrentPinCodeExeption, InterruptedException {
-        Scanner scanner = new Scanner(System.in);
 
-        Person p1 = Person.get(scanner);
+        PersonService personService = new PersonServiceImpl();
+        TransferService transferService = new TransferServiceImpl();
+        Terminal terminal = new TerminalImpl(transferService);
 
-        Person p2 = Person.get(scanner);
+        Person p1 = personService.getPerson();
+        Person p2 = personService.getPerson();
 
-        TerminalImpl terminalImpl = new TerminalImpl( p1,p2);
-         terminalImpl.transferToMySelf(p1);
-         terminalImpl.transferToAnother(p1,p2);
+        terminal.transferToMySelf(p1);
+        terminal.transferToAnother(p1, p2);
     }
 }
