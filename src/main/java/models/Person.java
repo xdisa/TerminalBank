@@ -1,9 +1,8 @@
+package models;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import java.util.Scanner;
-
 
 public class Person {
 
@@ -15,8 +14,8 @@ public class Person {
 
     private HashMap<Integer, Double> accs;
 
-    private static int pin;
-    /////////////////////////////////////////////
+    private int pin;
+
     public String getLastName() {
         return lastName;
     }
@@ -49,7 +48,7 @@ public class Person {
         this.accs = accs;
     }
 
-    public static int getPin() {
+    public int getPin() {
         return pin;
     }
 
@@ -57,8 +56,8 @@ public class Person {
         this.pin = pin;
     }
 
-    /////////////////////////////////////////////////////////////
-
+    public Person() {
+    }
 
     public Person(String lastName, String firstName, String patronymic, HashMap<Integer, Double> accs, int pin) {
         this.lastName = lastName;
@@ -70,13 +69,13 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-            "lastName='" + lastName + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", patronymic='" + patronymic + '\'' +
-            ", accs=" + accs +
-            ", pin=" + pin +
-            '}';
+        return "models.Person{" +
+                "lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", accs=" + accs +
+                ", pin=" + pin +
+                '}';
     }
 
     @Override
@@ -90,28 +89,5 @@ public class Person {
     @Override
     public int hashCode() {
         return Objects.hash(lastName, firstName, patronymic, accs, pin);
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public static Person get(Scanner scanner){
-        Person obj = new Person("","","",new HashMap<Integer,Double>(), 0000);
-        obj.lastName = scanner.nextLine();
-        System.out.println("enter lastName :");
-        obj.lastName = scanner.nextLine();
-        System.out.println("enter firstName :");
-        obj.firstName = scanner.nextLine();
-        System.out.println("enter fatherName :");
-        obj.patronymic = scanner.nextLine();
-        System.out.println("enter pin :");
-        obj.pin = scanner.nextInt();
-        System.out.println("Enter accs :");
-        for (int i=1;i<=3;i++){System.out.print("Enter  number " + i + ": ");
-            Integer num = scanner.nextInt();
-            System.out.print("Enter value " + i + ": ");
-            Double value = scanner.nextDouble();
-            obj.accs.put(num,value);
-        }
-        return obj;
     }
 }

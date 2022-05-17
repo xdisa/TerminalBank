@@ -1,4 +1,9 @@
+package services;
+
+import exceptions.BlockAccException;
+import exceptions.DontCorrentPinCodeExeption;
 import javax.security.auth.login.AccountLockedException;
+import models.Person;
 
 public class TerminalServer {
 
@@ -6,22 +11,21 @@ public class TerminalServer {
         throw new AccountLockedException("доступ заблокирован на: " + blocking.getSecondsCountToEnd() + "s.");
     }
 
-    static void checkPin(int pin) throws DontCorrentPinCodeExeption {
-        if (pin != getCorrectPin()) {
+    public static void checkPin(int pin, Person person) throws DontCorrentPinCodeExeption {
+        if (pin != getCorrectPin(person)) {
             throw new DontCorrentPinCodeExeption("неверный пин код");
         } else {
             System.out.println("доступ разрешен");
         }
     }
 
-    static void checkPinInputTryCount(int currentTry) {
+    public static void checkPinInputTryCount(int currentTry) {
         if (currentTry == 4) {
             throw new BlockAccException("доступ заблокирован");
         }
     }
 
-    private static int getCorrectPin() {
-        return Person.getPin();
-
+    private static int getCorrectPin(Person person) {
+        return person.getPin();
     }
 }
